@@ -12,10 +12,16 @@ namespace ClassesIntro
         public string Breed;
         public int Height;
         public string Name;
+        public string Color;
 
         public void Bark()
         {
             MessageBox.Show("Bark");
+        }
+
+        public void SayName()
+        {
+            MessageBox.Show($"My name is {Name}");
         }
 
         public Dog() { }
