@@ -1,13 +1,22 @@
-﻿k<Window x:Class="MovieList.MainWindow"
+﻿<Window x:Class="MovieList.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MovieList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="400" Width="525">
     <Grid>
         <StackPanel Margin ="10, 10, 10, 10" Orientation= "Vertical">
+            <ListView Name="lvMovies" Height="150" Margin="0,0,0,10" MouseDoubleClick="lvMovies_MouseDoubleClick">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="Title" DisplayMemberBinding="{Binding Title}"></GridViewColumn>
+                        <GridViewColumn Width="150" Header="Release Year" DisplayMemberBinding="{Binding ReleaseYear}"></GridViewColumn>
+                        <GridViewColumn Width="150" Header="RTScore" DisplayMemberBinding="{Binding RTScore}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
             <TextBlock>Title</TextBlock>
             <TextBox Name="titleInput" Margin="0, 0, 0, 15"></TextBox>
             <TextBlock>Release Year</TextBlock>
@@ -18,6 +27,8 @@
             <TextBox Name="lengthInput" Margin="0, 0, 0, 15"></TextBox>
             <TextBlock>Genre</TextBlock>
             <TextBox Name="genreInput" Margin="0, 0, 0, 15"></TextBox>
+            <TextBlock>RTScore</TextBlock>
+            <TextBox Name="rtscoreInput" Margin="0, 0, 0, 15"></TextBox>
             <Button Margin="0, 0, 0, 10" HorizontalAlignment="Center" Click="AddButton_Click">Add</Button>
             <Button HorizontalAlignment="Center" Click="ShowButton_Click">Show All Movies</Button>
         </StackPanel>

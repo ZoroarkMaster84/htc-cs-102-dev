@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +21,11 @@ namespace MovieList
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Movie> Movies = new List<Movie>();
+        ObservableCollection<Movie> Movies = new ObservableCollection<Movie>();
         public MainWindow()
         {
             InitializeComponent();
+            lvMovies.ItemsSource = Movies;
         }
 
         private void ShowButton_Click(object sender, RoutedEventArgs e)
@@ -41,9 +43,38 @@ namespace MovieList
             string director = directorInput.Text;
             double length = Convert.ToInt32(lengthInput.Text);
             string genre = genreInput.Text;
+            double rtscore = Convert.ToInt32(rtscoreInput.Text);
 
-            Movie movie = new Movie(title, releaseYear, director, length, genre);
-            Movies.Add(movie);
+            if (Movies.Count == 0)
+            {
+                Movie movie = new Movie(title, releaseYear, director, length, genre, rtscore);
+                Movies.Add(movie);
+            }
+            else
+            {
+                foreach (Movie film in Movies)
+                {
+                    if(film.Title == title )
+                    {
+                        MessageBox.Show("This movie already exists");
+                    }
+                    else
+                    {
+                        Movie movie = new Movie(title, releaseYear, director, length, genre, rtscore);
+                        Movies.Add(movie);
+                    }
+                }
+            }
+            
+        }
+
+        private void lvMovies_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Movie selectMovie = lvMovies.SelectedItem as Movie;
+            if(selectMovie != null)
+            {
+                selectMovie.ShowDetails();
+            }
         }
     }
 }

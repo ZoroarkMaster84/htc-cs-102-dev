@@ -9,19 +9,21 @@ namespace MovieList
 {
     public class Movie
     {
-        public string Title;
-        public int ReleaseYear;
-        public string Director;
-        public double Length;
-        public string Genre;
+        public string Title { get; set; }
+        public int ReleaseYear { get; set; }
+        public string Director { get; set; }
+        public double Length { get; set; }
+        public string Genre { get; set; }
+        public double RTScore { get; set; }
 
-        public Movie(string title, int releaseYear, string director, double length, string genre)
+        public Movie(string title, int releaseYear, string director, double length, string genre, double rtscore)
         {
             Title = title;
             ReleaseYear = releaseYear;
             Director = director;
             Length = length;
             Genre = genre;
+            RTScore = rtscore;
         }
 
         public void ShowDetails()
