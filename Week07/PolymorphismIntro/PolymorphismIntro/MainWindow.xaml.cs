@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,27 @@ namespace PolymorphismIntro
     /// </summary>
     public partial class MainWindow : Window
     {
+        public ObservableCollection<Animal> Animals;
+
         public MainWindow()
         {
             InitializeComponent();
+            Animals = new ObservableCollection<Animal>();
+            // Instantiate some dog objects
+            Dog dog1 = new Dog("Muppet", 20, "Rolf");
+            Dog dog2 = new Dog("Golden Retriever", 30, "Air Bud");
+            // Ducks and Frogs
+            Duck duck1 = new Duck(9, "Donald");
+            Frog frog1 = new Frog(4, "Kermit", false);
+
+            // Add the dogs to the list
+            Animals.Add(dog1);
+            Animals.Add(dog2);
+            Animals.Add(duck1);
+            Animals.Add(frog1);
+
+            lvAnimals.ItemsSource = Animals;
+
         }
 
         private void Bark_Button_Click(object sender, RoutedEventArgs e)
@@ -45,29 +64,29 @@ namespace PolymorphismIntro
 
         private void SayName_Button_Click(object sender, RoutedEventArgs e)
         {
+
             // Define a new List of dogs
-            List<Dog> dogs = new List<Dog>();
-            
-            // Instantiate some dog objects
-            Dog dog1 = new Dog("Muppet", 20, "Rolf");
-            Dog dog2 = new Dog("Golden Retriever", 30, "Air Bud");
+            List<Animal> animals = new List<Animal>();
+        }
 
-            // Add the dogs to the list
-            dogs.Add(dog1);
-            dogs.Add(dog2);
-
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
             // Loop through the list and call a method on the objects
-            foreach (Dog d in dogs)
+            foreach (Animal a in Animals)
             {
-                d.SayName();
+                a.SayName();
             }
 
-            // Ducks and Frogs
-            Duck duck1 = new Duck(9, "Donald");
-            duck1.SayName();
-
-            Frog frog1 = new Frog(4, "Kermit", false);
-            frog1.SayName();
         }
+
+        private void lvAnimals_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
+        {
+            Animal selectedAnimal = lvAnimals.SelectedItem as Animal;
+            if (selectedAnimal != null)
+            {
+                selectedAnimal.Speak();
+            }
+        }
+
     }
 }
